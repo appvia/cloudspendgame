@@ -3,53 +3,16 @@ import { cpuUsage } from 'process'
 const fs = require('fs')
 const _ = require('lodash')
 const data = require('./generate_data')
+const nodes = require('./nodes')
 
-const components = [
-  {
-    name: 'backend',
-    request_to_cpu: 20,
-    request_to_memory: 0.5,
-    baseline_cpu: 0.2,
-    baseline_memory: 128,
-    limit_memory: 1024,
-    limit_cpu: 2,
-    min_replica: 2,
-    max_replica: 200,
-    scaling_threshold_cpu: 90,
-    scaling_intervals: 2
-  },
-  {
-    name: 'frontend',
-    request_to_cpu: 1000,
-    request_to_memory: 50,
-    baseline_cpu: 0.1,
-    baseline_memory: 32,
-    limit_memory: 128,
-    limit_cpu: 0.5,
-    min_replica: 2,
-    max_replica: 10,
-    scaling_threshold_cpu: 50,
-    scaling_intervals: 10
-  },
-  {
-    name: 'database',
-    request_to_cpu: 200,
-    request_to_memory: 0.9,
-    baseline_cpu: 0.2,
-    baseline_memory: 256,
-    limit_memory: 1024,
-    limit_cpu: 4,
-    min_replica: 3,
-    max_replica: 8,
-    scaling_threshold_cpu: 98,
-    scaling_intervals: 90
-  }
-]
+const components = require('./components')
+
+const node_pool = nodes['t2.medium']
 
 const scenario = data.map(interval => {
   const intervalComponents = components.map(component => {
-    const need_cpu = interval.requests / component.request_to_cpu
-    const need_memory = interval.requests / component.request_to_memory
+    const need_cpu = interval.requests * component.request_to_cpu
+    const need_memory = interval.requests * component.request_to_memory
     const need_cpu_replica = Math.ceil(
       need_cpu / (component.limit_cpu - component.baseline_cpu)
     )
@@ -74,7 +37,9 @@ const scenario = data.map(interval => {
   })
   return {
     ...interval,
-    components: intervalComponents
+    components: intervalComponents,
+    node_count: node_pool.minimum_nodes,
+    node_ready: node_pool.minimum_nodes
   }
 })
 
@@ -108,7 +73,6 @@ const play = scenario.map((interval, iid) => {
       capacity_cpu,
       capacity_memory,
       capacity,
-      unneeded_replica: component.actual_replica - component.need_replica,
       failedRequests: Math.max(0, interval.requests - capacity)
     }
   })
@@ -119,12 +83,65 @@ const play = scenario.map((interval, iid) => {
   }
 })
 
+const node_scale = play.map((interval, iid) => {
+  const desired_pods = interval.components.reduce((accumulator, component) => {
+    return accumulator + component.actual_replica
+  }, 0)
+
+  const desired_cpu = interval.components.reduce((accumulator, component) => {
+    return accumulator + component.capacity_cpu
+  }, 0)
+  const desired_memory = interval.components.reduce(
+    (accumulator, component) => {
+      return accumulator + component.capacity_memory
+    },
+    0
+  )
+
+  const needed_nodes_by_cpu = Math.ceil(desired_cpu / node_pool.available_cpu)
+  const needed_nodes_by_memory = Math.ceil(
+    desired_cpu / node_pool.available_memory
+  )
+
+  const needed_nodes_by_pods = Math.ceil(desired_pods / node_pool.max_pods)
+
+  const needed_nodes = Math.max(
+    needed_nodes_by_cpu,
+    needed_nodes_by_memory,
+    needed_nodes_by_pods
+  )
+
+  const node_count = withinRange(
+    node_pool.minimum_nodes,
+    node_pool.maximum_nodes,
+    needed_nodes
+  )
+  if (iid + node_pool.scaling_intervals < play.length) {
+    play[iid + node_pool.scaling_intervals].node_ready = node_count
+  }
+  return {
+    ...interval,
+    desired_pods,
+    needed_nodes,
+    needed_nodes_by_pods,
+    needed_nodes_by_cpu,
+    needed_nodes_by_memory,
+    node_count
+  }
+})
+
+const costed = node_scale.map(interval => {
+  return { ...interval, cost: interval.node_count * node_pool.cost }
+})
+
 function withinRange (min, max, number) {
   return Math.ceil(Math.max(min, Math.min(max, number)))
 }
 
-console.log(play[0], play[1])
+// console.log(costed[0], costed[1])
 
-// console.log(scenario[0], scenario[1])
-
-fs.writeFileSync('./play.json', JSON.stringify(play))
+costed.map(i => {
+  console.log(i)
+  return i
+})
+fs.writeFileSync('./play.json', JSON.stringify(costed))
