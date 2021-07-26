@@ -1,3 +1,4 @@
 node_modules
 grafanadata
-play.json
+output.json
+coverage
