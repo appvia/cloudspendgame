@@ -10,3 +10,4 @@
 - [x] calculate capacity from ready pods
 - [x] calculate failed requests from delta of ready to needed
 - [x] calculate compute costs
+- [ ] allow configuring readiness tests
