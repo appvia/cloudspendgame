@@ -1,0 +1,26 @@
+.bg-light,
+#total_requests_vs_failed svg {
+  background-color: green !important;
+}
+body {
+  background: darkgreen;
+  color: lightgrey;
+  font-family: 'VT323', sans-serif;
+}
+.score p {
+  font-size: 4em;
+}
+.intro p {
+  font-size: 2em;
+}
+h1 {
+  font-size: 10em;
+  text-align: center;
+}
+
+button {
+  font-size: 2em;
+  width: 90%;
+  display: block;
+  margin: 1em auto;
+}
