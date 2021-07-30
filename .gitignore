@@ -1,5 +1,4 @@
 node_modules
 grafanadata
-output.json
+./output.json
 coverage
-gui/output.json
