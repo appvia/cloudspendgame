@@ -78,11 +78,13 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             default: 200
           },
           "CPU Limit": {
+            title: "CPU Limit (millicores)",
             type: "integer",
             minimum: 50,
             default: 800
           },
           "Memory Limit": {
+            title: "Memory Limit (mb)",
             type: "integer",
             minimum: 32,
             default: 256
@@ -124,11 +126,13 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             default: 200
           },
           "CPU Limit": {
+            title: "CPU Limit (millicores)",
             type: "integer",
             minimum: 250,
             default: 850
           },
           "Memory Limit": {
+            title: "Memory Limit (mb)",
             type: "integer",
             minimum: 512,
             default: 1024
@@ -169,11 +173,13 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             default: 10
           },
           "CPU Limit": {
+            title: "CPU Limit (millicores)",
             type: "integer",
             minimum: 800,
             default: 15000
           },
           "Memory Limit": {
+            title: "Memory Limit (mb)",
             type: "integer",
             minimum: 1024,
             default: 4096
