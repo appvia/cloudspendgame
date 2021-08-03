@@ -7,30 +7,38 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
   schema: {
     type: "object",
     properties: {
-      "Who are you": {
+      "player": {
+        title: "Claim your highscore position",
         type: "object",
         required: [
           "Name",
           "Company",
           "Email Address",
-          "Github Username",
         ],
         properties: {
           Name: {
             type: "string",
-            default: "John Doe"
+            options: {
+              inputAttributes: {
+                placeholder: "Some Anonymous Coward"
+              }
+            }
           },
           Company: {
             type: "string",
-            default: "Acme inc"
+            options: {
+              inputAttributes: {
+                placeholder: "Acme inc"
+              }
+            }
           },
           "Email Address": {
             type: "string",
-            default: "user@acme.inc"
-          },
-          "Github Username": {
-            type: "string",
-            default: "johndoeacme"
+            options: {
+              inputAttributes: {
+                placeholder: "user@acme.inc"
+              }
+            }
           },
         }
       },
@@ -50,7 +58,10 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             type: "integer",
             maximum: 1000,
             minimum: 1,
-            default: 70
+            default: 70,
+            options: {
+              format: "number"
+            }
           },
           nodeScaling: {
             type: "checkbox",
@@ -62,6 +73,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             minimum: 1,
             default: 1000,
             options: {
+              format: "number",
               dependencies: {
                 "nodeScaling": true,
               }
@@ -75,19 +87,26 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
           "Minimum Replica": {
             type: "integer",
             minimum: 1,
-            default: 200
+            default: 200,
+            options: {
+              format: "number"
+            }
           },
           "CPU Limit": {
             title: "CPU Limit (millicores)",
             type: "integer",
             minimum: 50,
-            default: 800
+            default: 800, options: {
+              format: "number"
+            }
           },
           "Memory Limit": {
             title: "Memory Limit (mb)",
             type: "integer",
             minimum: 32,
-            default: 256
+            default: 256, options: {
+              format: "number"
+            }
           },
           HPA: {
             type: "checkbox",
@@ -98,6 +117,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             minimum: 1,
             default: 2000,
             options: {
+              format: "number",
               dependencies: {
                 "HPA": true,
               }
@@ -109,6 +129,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             minimum: 1,
             default: 70,
             options: {
+              format: "range",
               dependencies: {
                 "HPA": true,
               }
@@ -123,19 +144,28 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
           "Minimum Replica": {
             type: "integer",
             minimum: 1,
-            default: 200
+            default: 200,
+            options: {
+              format: "number"
+            }
           },
           "CPU Limit": {
             title: "CPU Limit (millicores)",
             type: "integer",
             minimum: 250,
-            default: 850
+            default: 850,
+            options: {
+              format: "number"
+            }
           },
           "Memory Limit": {
             title: "Memory Limit (mb)",
             type: "integer",
             minimum: 512,
-            default: 1024
+            default: 1024,
+            options: {
+              format: "number"
+            }
           },
           HPA: {
             type: "checkbox",
@@ -146,6 +176,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             minimum: 1,
             default: 800,
             options: {
+              format: "number",
               dependencies: {
                 "HPA": true,
               }
@@ -157,6 +188,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             minimum: 1,
             default: 70,
             options: {
+              format: "range",
               dependencies: {
                 "HPA": true,
               }
@@ -170,19 +202,28 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
           "Minimum Replica": {
             type: "integer",
             minimum: 1,
-            default: 10
+            default: 10,
+            options: {
+              format: "number"
+            }
           },
           "CPU Limit": {
             title: "CPU Limit (millicores)",
             type: "integer",
             minimum: 800,
-            default: 15000
+            default: 15000,
+            options: {
+              format: "number"
+            }
           },
           "Memory Limit": {
             title: "Memory Limit (mb)",
             type: "integer",
             minimum: 1024,
-            default: 4096
+            default: 4096,
+            options: {
+              format: "number"
+            }
           },
           HPA: {
             type: "checkbox",
@@ -193,6 +234,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             minimum: 1,
             default: 70,
             options: {
+              format: "number",
               dependencies: {
                 "HPA": true,
               }
@@ -204,6 +246,7 @@ var editor = new JSONEditor(document.getElementById('editor_holder'), {
             minimum: 1,
             default: 50,
             options: {
+              format: "range",
               dependencies: {
                 "HPA": true,
               }
@@ -234,6 +277,7 @@ editor.on('change', function () {
     indicator.style.color = 'green'
 
 })
+
 // $("button").click(() => {
 //   $("#result").toggle()
 //   $(".container").toggle()
