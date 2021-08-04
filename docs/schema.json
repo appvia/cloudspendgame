@@ -48,7 +48,7 @@
           "enum": ["m5.4xlarge", "m5.8xlarge", "m5.16xlarge"],
           "type": "string"
         },
-        "Node minimum count": {
+        "Node maximum count": {
           "type": "integer",
           "maximum": 1000,
           "minimum": 1,
@@ -61,11 +61,11 @@
           "type": "checkbox",
           "title": "Node auto scaling (+$300)"
         },
-        "Node maximum count": {
+        "Node minimum count": {
           "type": "integer",
           "maximum": 1000,
           "minimum": 1,
-          "default": 1000,
+          "default": 10,
           "options": {
             "format": "number",
             "dependencies": {
@@ -78,7 +78,7 @@
     "Frontend": {
       "type": "object",
       "properties": {
-        "Minimum Replica": {
+        "Maximum Replica": {
           "type": "integer",
           "minimum": 1,
           "default": 550,
@@ -108,10 +108,10 @@
           "type": "checkbox",
           "title": "Frontend autoscaling (Horizontal Pod Autoscaler) (+$200)"
         },
-        "Maximum Replica": {
+        "Minimum Replica": {
           "type": "integer",
           "minimum": 1,
-          "default": 2000,
+          "default": 10,
           "options": {
             "format": "number",
             "dependencies": {
@@ -137,7 +137,7 @@
     "Backend": {
       "type": "object",
       "properties": {
-        "Minimum Replica": {
+        "Maximum Replica": {
           "type": "integer",
           "minimum": 1,
           "default": 1000,
@@ -167,10 +167,10 @@
           "type": "checkbox",
           "title": "Backend autoscaling (Horizontal Pod Autoscaler) (+$200)"
         },
-        "Maximum Replica": {
+        "Minimum Replica": {
           "type": "integer",
           "minimum": 1,
-          "default": 2000,
+          "default": 100,
           "options": {
             "format": "number",
             "dependencies": {
@@ -195,7 +195,7 @@
     "Database": {
       "type": "object",
       "properties": {
-        "Minimum Replica": {
+        "Maximum Replica": {
           "type": "integer",
           "minimum": 1,
           "default": 80,
@@ -225,10 +225,10 @@
           "type": "checkbox",
           "title": "Database autoscaling (Horizontal Pod Autoscaler) (+$1500)"
         },
-        "Maximum Replica": {
+        "Minimum Replica": {
           "type": "integer",
           "minimum": 1,
-          "default": 100,
+          "default": 10,
           "options": {
             "format": "number",
             "dependencies": {

@@ -67,10 +67,10 @@ export async function play (
 
   const node = {
     ...nodes[payload.Nodes['Node Type']],
-    maxNodes: payload.Nodes.nodeScaling
-      ? payload.Nodes['Node maximum count']
-      : payload.Nodes['Node minimum count'],
-    minNodes: payload.Nodes['Node minimum count']
+    minNodes: payload.Nodes.nodeScaling
+      ? payload.Nodes['Node minimum count']
+      : payload.Nodes['Node maximum count'],
+    maxNodes: payload.Nodes['Node minimum count']
   }
 
   const components = [
@@ -82,10 +82,10 @@ export async function play (
       baselineMemory: 512,
       limitMemory: payload.Backend['Memory Limit'],
       limitCpu: payload.Backend['CPU Limit'],
-      minReplica: payload.Backend['Minimum Replica'],
-      maxReplica: payload.Backend.HPA
-        ? payload.Backend['Maximum Replica']
-        : payload.Backend['Minimum Replica'],
+      minReplica: payload.Backend.HPA
+        ? payload.Backend['Minimum Replica']
+        : payload.Backend['Maximum Replica'],
+      maxReplica: payload.Backend['Maximum Replica'],
       scalingThresholdCpu: payload.Backend.HPA
         ? payload.Backend['CPU Scaling Threshold']
         : 99,
@@ -99,10 +99,10 @@ export async function play (
       baselineMemory: 32,
       limitMemory: payload.Frontend['Memory Limit'],
       limitCpu: payload.Frontend['CPU Limit'],
-      minReplica: payload.Frontend['Minimum Replica'],
-      maxReplica: payload.Frontend.HPA
-        ? payload.Frontend['Maximum Replica']
-        : payload.Frontend['Minimum Replica'],
+      minReplica: payload.Frontend.HPA
+        ? payload.Frontend['Minimum Replica']
+        : payload.Frontend['Maximum Replica'],
+      maxReplica: payload.Frontend['Maximum Replica'],
       scalingThresholdCpu: payload.Frontend.HPA
         ? payload.Frontend['CPU Scaling Threshold']
         : 99,
@@ -116,10 +116,10 @@ export async function play (
       baselineMemory: 1024,
       limitMemory: payload.Database['Memory Limit'],
       limitCpu: payload.Database['CPU Limit'],
-      minReplica: payload.Database['Minimum Replica'],
-      maxReplica: payload.Database.HPA
-        ? payload.Database['Maximum Replica']
-        : payload.Database['Minimum Replica'],
+      minReplica: payload.Database.HPA
+        ? payload.Database['Minimum Replica']
+        : payload.Database['Maximum Replica'],
+      maxReplica: payload.Database['Maximum Replica'],
       scalingThresholdCpu: payload.Database.HPA
         ? payload.Database['CPU Scaling Threshold']
         : 99,
