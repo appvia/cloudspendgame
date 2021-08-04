@@ -34,6 +34,9 @@ $("button").click(() => {
     contentType: 'application/json',
 
   })
+    .catch(error => {
+      alert("could not fit minimum pods on nodes")
+    })
     .then(response => {
       $("div.score").show()
       $("button .spinner-border").hide()
