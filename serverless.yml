@@ -40,7 +40,7 @@ functions:
 
   play:
     handler: index.play
-    timeout: 28
+    timeout: 12
     events:
       - httpApi:
           path: /

@@ -136,7 +136,6 @@ export async function play (
       time: interval.time,
       requests: interval.requests,
       failedRequests: interval.failedRequests,
-      // failedRequestPenalty: interval.failedRequests,
       cost: interval.cost
     }
   })
