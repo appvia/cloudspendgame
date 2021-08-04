@@ -1,3 +1,7 @@
+#editor_holder > div > h3 {
+  display: none !important;
+}
+
 .bg-light,
 #total_requests_vs_failed svg {
   background-color: green !important;
@@ -6,6 +10,9 @@ body {
   background: darkgreen;
   color: lightgrey;
   font-family: 'VT323', sans-serif;
+}
+small.form-text {
+  color: lightgrey;
 }
 .score p {
   font-size: 4em;
@@ -23,4 +30,16 @@ button {
   width: 90%;
   display: block;
   margin: 1em auto;
+}
+
+div[data-schemapath='root.player'] {
+  display: none;
+}
+
+button .spinner-border {
+  display: none;
+}
+
+div.score {
+  display: none;
 }

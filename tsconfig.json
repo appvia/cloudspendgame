@@ -1,5 +1,17 @@
 {
   "compilerOptions": {
-    "checkJs": false
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": false,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "es6",
+    "outDir": ".build",
+    "moduleResolution": "node",
+    "lib": ["es2015"],
+    "rootDir": "./",
+    "baseUrl": ".",
+    "skipLibCheck": true
   }
 }

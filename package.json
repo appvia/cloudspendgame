@@ -3,19 +3,35 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "ts-node index.ts",
-    "test": "jest --ci"
+  "directories": {
+    "doc": "docs"
   },
-  "author": "",
-  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appvia/cloudspendgame.git"
+  },
+  "author": "Chris Nesbitt-Smith",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/appvia/cloudspendgame/issues"
+  },
+  "homepage": "https://github.com/appvia/cloudspendgame#readme",
+  "dependencies": {
+    "cloud-spend-forecaster": "github:appvia/cloud-spend-forecaster"
+  },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.81",
     "@types/jest": "^26.0.24",
     "jest": "^27.0.6",
-    "ts-jest": "^27.0.4"
+    "serverless": "^2.52.1",
+    "serverless-bundle": "^4.4.0",
+    "ts-jest": "^27.0.4",
+    "typescript": "^4.3.5"
   },
-  "dependencies": {
-    "lodash": "^4.17.21",
-    "ts-node": "^10.1.0"
+  "optionalDependencies": {
+    "aws-sdk": "^2.960.0"
   }
 }

@@ -1,27 +1,23 @@
 // set the dimensions and margins of the graph
 const margin = { top: 15, left: 60 }
 
-const loadTime = 3
-d3.json('./output.json').then(data => {
+const loadTime = 3 * 1000
+// d3.json('./output.json').then(d3GUI)
 
-  const totalRequests = Math.ceil(data.reduce((accumulator, interval) => accumulator + interval.requests, 0))
-  const failedRequests = Math.ceil(data.reduce((accumulator, interval) => accumulator + interval.failedRequests, 0))
-  const spend = data.reduce((accumulator, interval) => accumulator + interval.cost, 0)
-  const penalties = failedRequests * 0.01
-  const savings = 10000 - spend
+const d3GUI = data => {
 
-  countup("#totalrequests", totalRequests)
-  countup("#failedrequests", failedRequests)
-  countup("#spend", spend)
-  countup("#savings", savings)
-  countup("#penalties", penalties)
-  countup("#totalscore", savings - penalties)
+  countup("#totalrequests", data.totalRequests)
+  countup("#failedrequests", data.failedRequests)
+  countup("#spend", data.spend)
+  countup("#savings", data.savings)
+  countup("#penalties", data.penalties)
+  countup("#totalscore", data.score)
 
   function countup(selector, value) {
     $(selector).prop('Counter', 0).animate({
       Counter: value
     }, {
-      duration: loadTime * 1000,
+      duration: loadTime,
       easing: 'swing',
       step: function (now) {
         $(selector).text(this.Counter.toFixed(0));
@@ -42,6 +38,10 @@ d3.json('./output.json').then(data => {
     div.id = graph.id
     document.getElementById("my_dataviz").appendChild(div)
 
+    d3
+      .select(`#${graph.id} svg`)
+      .remove()
+
     const svg = d3
       .select(`#${graph.id}`)
       .append('svg')
@@ -56,7 +56,7 @@ d3.json('./output.json').then(data => {
 
     const x = d3
       .scaleTime()
-      .domain(d3.extent(data, d => d.time))
+      .domain(d3.extent(data.data, d => d.time))
       .range([0, 900])
 
     svg
@@ -68,7 +68,7 @@ d3.json('./output.json').then(data => {
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(data, d => d.requests)])
+      .domain([0, d3.max(data.data, d => d.requests)])
       .range([height, 0])
 
     svg.append('g').call(d3.axisLeft(y))
@@ -76,7 +76,7 @@ d3.json('./output.json').then(data => {
     graph.keys.forEach(key => {
       svg
         .append('path')
-        .datum(data)
+        .datum(data.data)
         .attr("fill", "none")
         .attr("stroke", (d) => color(key))
         .attr('stroke-width', 1.5)
@@ -88,7 +88,7 @@ d3.json('./output.json').then(data => {
             .y(d => y(d[key]))
         )
         .transition()
-        .duration(5 * 1000)
+        .duration(loadTime)
         .attrTween("stroke-dasharray", tweenDash)
 
       function tweenDash() {
@@ -121,4 +121,4 @@ d3.json('./output.json').then(data => {
       .attr("text-anchor", "left")
       .style("alignment-baseline", "middle")
   })
-})
+}

@@ -1,0 +1,254 @@
+{
+  "type": "object",
+  "properties": {
+    "player": {
+      "title": "Claim your highscore position",
+      "type": "object",
+      "required": ["Handle", "Email Address"],
+      "properties": {
+        "Handle": {
+          "type": "string",
+          "description": "Used on the scoreboard",
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Mr.Robot"
+            }
+          }
+        },
+        "Real Name": {
+          "type": "string",
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Some Anonymous Coward"
+            }
+          }
+        },
+        "Company": {
+          "type": "string",
+          "options": {
+            "inputAttributes": {
+              "placeholder": "Acme inc"
+            }
+          }
+        },
+        "Email Address": {
+          "type": "string",
+          "options": {
+            "inputAttributes": {
+              "placeholder": "user@acme.inc"
+            }
+          }
+        }
+      }
+    },
+    "Nodes": {
+      "type": "object",
+      "properties": {
+        "Node Type": {
+          "enum": ["m5.4xlarge", "m5.8xlarge", "m5.16xlarge"],
+          "type": "string"
+        },
+        "Node minimum count": {
+          "type": "integer",
+          "maximum": 1000,
+          "minimum": 1,
+          "default": 175,
+          "options": {
+            "format": "number"
+          }
+        },
+        "nodeScaling": {
+          "type": "checkbox",
+          "title": "Node auto scaling (+$300)"
+        },
+        "Node maximum count": {
+          "type": "integer",
+          "maximum": 1000,
+          "minimum": 1,
+          "default": 1000,
+          "options": {
+            "format": "number",
+            "dependencies": {
+              "nodeScaling": true
+            }
+          }
+        }
+      }
+    },
+    "Frontend": {
+      "type": "object",
+      "properties": {
+        "Minimum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 550,
+          "options": {
+            "format": "number"
+          }
+        },
+        "CPU Limit": {
+          "title": "CPU Limit (millicores)",
+          "type": "integer",
+          "minimum": 50,
+          "default": 800,
+          "options": {
+            "format": "number"
+          }
+        },
+        "Memory Limit": {
+          "title": "Memory Limit (mb)",
+          "type": "integer",
+          "minimum": 32,
+          "default": 256,
+          "options": {
+            "format": "number"
+          }
+        },
+        "HPA": {
+          "type": "checkbox",
+          "title": "Frontend autoscaling (Horizontal Pod Autoscaler) (+$200)"
+        },
+        "Maximum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 2000,
+          "options": {
+            "format": "number",
+            "dependencies": {
+              "HPA": true
+            }
+          }
+        },
+        "CPU Scaling Threshold": {
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 1,
+          "default": 70,
+          "options": {
+            "format": "range",
+            "dependencies": {
+              "HPA": true
+            }
+          }
+        }
+      }
+    },
+
+    "Backend": {
+      "type": "object",
+      "properties": {
+        "Minimum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1000,
+          "options": {
+            "format": "number"
+          }
+        },
+        "CPU Limit": {
+          "title": "CPU Limit (millicores)",
+          "type": "integer",
+          "minimum": 250,
+          "default": 850,
+          "options": {
+            "format": "number"
+          }
+        },
+        "Memory Limit": {
+          "title": "Memory Limit (mb)",
+          "type": "integer",
+          "minimum": 512,
+          "default": 1024,
+          "options": {
+            "format": "number"
+          }
+        },
+        "HPA": {
+          "type": "checkbox",
+          "title": "Backend autoscaling (Horizontal Pod Autoscaler) (+$200)"
+        },
+        "Maximum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 2000,
+          "options": {
+            "format": "number",
+            "dependencies": {
+              "HPA": true
+            }
+          }
+        },
+        "CPU Scaling Threshold": {
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 1,
+          "default": 70,
+          "options": {
+            "format": "range",
+            "dependencies": {
+              "HPA": true
+            }
+          }
+        }
+      }
+    },
+    "Database": {
+      "type": "object",
+      "properties": {
+        "Minimum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 80,
+          "options": {
+            "format": "number"
+          }
+        },
+        "CPU Limit": {
+          "title": "CPU Limit (millicores)",
+          "type": "integer",
+          "minimum": 800,
+          "default": 15000,
+          "options": {
+            "format": "number"
+          }
+        },
+        "Memory Limit": {
+          "title": "Memory Limit (mb)",
+          "type": "integer",
+          "minimum": 1024,
+          "default": 4096,
+          "options": {
+            "format": "number"
+          }
+        },
+        "HPA": {
+          "type": "checkbox",
+          "title": "Database autoscaling (Horizontal Pod Autoscaler) (+$1500)"
+        },
+        "Maximum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 100,
+          "options": {
+            "format": "number",
+            "dependencies": {
+              "HPA": true
+            }
+          }
+        },
+        "CPU Scaling Threshold": {
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 1,
+          "default": 50,
+          "options": {
+            "format": "range",
+            "dependencies": {
+              "HPA": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

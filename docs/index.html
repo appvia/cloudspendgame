@@ -4,9 +4,14 @@
     <!-- <meta http-equiv="refresh" content="15;url=./" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    <title>Black Friday</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+    <link
+      href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAANDAwADA0MABjwBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACAAAAACAAAAAgAAAAIAICACAAAAACAgICAAAAACIiIiIiAAACIiIiIiIgAAIiACIAIiAAACIAIgAiAAAAAiIiIiAAAAAAIAACEQAAAAAgAAIAAAABIiASIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      rel="icon"
+      type="image/x-icon"
+    />
     <link href="https://fonts.cdnfonts.com/css/vt323" rel="stylesheet" />
 
     <link
@@ -46,9 +51,23 @@
             Your mission should you choose to accept it is to save the company
             the most amount of money.
           </p>
-          <button id="submit">Submit</button>
+          <button>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Submit
+          </button>
           <div id="editor_holder"></div>
-          <button id="submit">Submit</button>
+          <button>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span
+            >Submit
+          </button>
         </div>
         <div class="col score">
           <p>Total requests: <span id="totalrequests">0</span></p>

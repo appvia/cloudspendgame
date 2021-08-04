@@ -1,0 +1,108 @@
+service: blackfriday
+
+frameworkVersion: '2'
+
+useDotenv: true
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+
+  # - serverless-plugin-typescript
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-west-2
+  stage: production
+  versionFunctions: false
+  iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+        - dynamodb:PutItem
+        Resource: 
+          - Fn::GetAtt:
+            - scoreTable
+            - Arn
+
+  environment:
+    SCORE_TABLE: ${self:custom.tableNames.scoreTable}
+
+
+functions:
+  statichttp:
+    handler: index.pageHandler
+    events:
+      - httpApi:
+          path: /
+          method: GET
+      - httpApi:
+          path: /{any+}
+          method: GET
+
+  play:
+    handler: index.play
+    timeout: 28
+    events:
+      - httpApi:
+          path: /
+          method: POST
+      - httpApi:
+          path: /foo
+          method: GET
+
+
+package:
+  include:
+    - "docs/**"
+  exclude:
+    - "tests/**"
+    - "*.md"
+    - "wallaby.js"
+    - "jest.config.js"
+    - "package-lock.json"
+    # - "node_modules/aws-sdk/**"
+    - "coverage/**"
+    - ".*"
+    - ".*/**"
+
+resources:
+  Resources:
+
+    scoreTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableNames.scoreTable}
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: score
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: score
+            AttributeType: "N"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 2
+
+custom:
+  bundle:
+    linting: false
+    # caching: false
+
+    sourcemaps: false
+    copyFiles:                     
+      - from: 'docs/*'             
+        to: './'                   
+
+
+  dynamodb:
+    noStart: true
+
+  tableNames:
+    scoreTable: blackFridayScoreTable
+
+    stages:
+      - production
+    start:
+      migrate: true
