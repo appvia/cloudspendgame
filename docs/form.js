@@ -25,6 +25,7 @@ editor.on('change', function () {
 })
 
 $("button").click(() => {
+  $("button").attr("disabled", true)
   $("button .spinner-border").css("display", "inline-block")
   $("div[data-schemapath='root.player']").show()
   $.post({
@@ -38,6 +39,7 @@ $("button").click(() => {
       alert("could not fit minimum pods on nodes")
     })
     .then(response => {
+      $("button").attr("disabled", false)
       $("div.score").show()
       $("button .spinner-border").hide()
       d3GUI(response)
