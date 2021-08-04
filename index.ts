@@ -61,8 +61,6 @@ export async function play (
   event: APIGatewayProxyEventV2,
   context: Context
 ): Promise<APIGatewayProxyResultV2> {
-  console.log(event)
-
   const payload = JSON.parse(event.body)
 
   const node = {
@@ -70,9 +68,8 @@ export async function play (
     minNodes: payload.Nodes.nodeScaling
       ? payload.Nodes['Node minimum count']
       : payload.Nodes['Node maximum count'],
-    maxNodes: payload.Nodes['Node minimum count']
+    maxNodes: payload.Nodes['Node maximum count']
   }
-
   const components = [
     {
       name: 'backend',
@@ -126,6 +123,7 @@ export async function play (
       scalingIntervals: 2
     }
   ]
+  console.log(components)
 
   const data = calculate(
     pullers,
@@ -152,10 +150,16 @@ export async function play (
       0
     )
   )
-  const spend = data.reduce(
+  let spend = data.reduce(
     (accumulator, interval) => accumulator + interval.cost,
     0
   )
+
+  if (payload.Nodes.nodeScaling) spend = spend + 300
+  if (payload.Frontend.HPA) spend = spend + 200
+  if (payload.Backend.HPA) spend = spend + 200
+  if (payload.Database.HPA) spend = spend + 1500
+
   const penalties = failedRequests * failedRequestPenalty
   const savings = baseLineCost - spend
   const score = savings - penalties
