@@ -209,6 +209,9 @@ export async function pageHandler (
   } else if (event.rawPath === '/form.js' || event.rawPath === '/gui.js') {
     file = `./docs${event.rawPath}`
     mime = 'text/javascript'
+  } else if (event.rawPath === '/man.svg' || event.rawPath === '/bg.svg') {
+    file = `./docs${event.rawPath}`
+    mime = 'image/svg+xml'
   } else if (event.rawPath === '/schema.json') {
     file = `./docs${event.rawPath}`
     mime = 'application/json'

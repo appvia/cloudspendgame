@@ -27,7 +27,7 @@ editor.on('change', function () {
 $("button").click(() => {
   $("button").attr("disabled", true)
   $("button .spinner-border").css("display", "inline-block")
-  $("div[data-schemapath='root.player']").show()
+  $("div[data-schemapath='root.player']").slideDown()
   $.post({
     url: './',
     data: JSON.stringify(editor.getValue()),
@@ -46,3 +46,12 @@ $("button").click(() => {
     })
 })
 
+$("#front").click(() => {
+  $("#front").hide()
+  $("#intro").show()
+})
+
+$("#intro").click(() => {
+  $("#intro").hide()
+  $("#controls").show()
+})

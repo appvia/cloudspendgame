@@ -1,7 +1,6 @@
 <html>
   <head>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <!-- <meta http-equiv="refresh" content="15;url=./" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Black Friday</title>
@@ -12,7 +11,10 @@
       rel="icon"
       type="image/x-icon"
     />
-    <link href="https://fonts.cdnfonts.com/css/vt323" rel="stylesheet" />
+    <link
+      href="http://fonts.cdnfonts.com/css/press-start-2p"
+      rel="stylesheet"
+    />
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -25,32 +27,61 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-
     <link rel="stylesheet" href="./styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h1>Black Friday</h1>
-        </div>
+    <h1>Black Friday</h1>
+    <div id="bg-image"></div>
+    <div id="front" class="screen">
+      <svg id="h1" viewBox="0 0 194 67">
+        <text x="0" y="0">
+          <tspan class="first" x="2" dy="40">Black</tspan>
+          <tspan x="2" dy="29">Friday</tspan>
+        </text>
+      </svg>
+      <svg class="start" viewBox="0 0 138 35 ">
+        <text x="0" y="0">
+          <tspan x="58%" dy="18">Press</tspan>
+          <tspan x="51%" dy="16 ">To Start</tspan>
+        </text>
+      </svg>
+      <div class="man"></div>
+    </div>
+    <div id="intro" class="screen">
+      <!-- <svg id="text" viewBox="0 0 194 67">
+        <text x="0" y="0">
+          <tspan x="2" dy="40">Black</tspan>
+          <tspan x="2" dy="29">Friday</tspan>
+        </text>
+      </svg> -->
+
+      <div class="text">
+        <p>
+          It's the Black Friday weekend, you're a devops lead on an online
+          retailer planning a well hyped sale on black friday and on cyber
+          monday.
+        </p>
+        <p>
+          Your team have laboured over performance testing all the components
+          and things scale linearly.
+        </p>
+        <p>
+          Your mission should you choose to accept it is to save the company the
+          most amount of money.
+        </p>
       </div>
+      <svg class="start" viewBox="0 0 138 35 ">
+        <text x="0" y="0">
+          <tspan x="58%" dy="18">Press</tspan>
+          <tspan x="51%" dy="16 ">To Start</tspan>
+        </text>
+      </svg>
+      <div class="man"></div>
+    </div>
+    <div id="controls" class="container screen">
       <div class="row align-items-start">
         <div class="col intro">
-          <p>
-            It's the black friday weekend, you're a devops lead on an online
-            retailer planning a well hyped sale on black friday and on cyber
-            monday.
-          </p>
-          <p>
-            Your team have laboured over performance testing all the components
-            and things scale linearly.
-          </p>
-          <p>
-            Your mission should you choose to accept it is to save the company
-            the most amount of money.
-          </p>
           <button>
             <span
               class="spinner-border spinner-border-sm"
