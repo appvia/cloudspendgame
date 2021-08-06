@@ -45,10 +45,7 @@ functions:
       - httpApi:
           path: /
           method: POST
-      - httpApi:
-          path: /foo
-          method: GET
-
+          cors: true
 
 package:
   include:

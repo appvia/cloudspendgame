@@ -3,18 +3,21 @@
   text-transform: uppercase;
   line-height: 0.8em;
 } */
-#front svg#h1 {
-  width: 80%;
-  background: white;
-  border: 0.3em black solid;
-  margin: 0 auto;
-  top: 1%;
-  left: 1%;
-  font-size: 2em;
+#front {
+  svg#h1 {
+    width: 80%;
+    background: white;
+    border: 0.3em black solid;
+    margin: 0 auto;
+    top: 1%;
+    left: 1%;
+    font-size: 2em;
+    .first {
+      font-size: 1.2em;
+    }
+  }
 }
-#front svg#h1 .first {
-  font-size: 1.2em;
-}
+
 #front svg#h1,
 svg.start {
   z-index: 10;
@@ -41,30 +44,31 @@ svg.start {
   }
 }
 
-.bg-light,
-#total_requests_vs_failed svg {
-  background-color: #d2e3fc !important;
-  /* background-color: rgba(255, 255, 255, 0.9) !important; */
-  /* background-color: green !important; */
-}
 body {
   font-family: 'Press Start 2P', sans-serif;
 }
-small.form-text {
-  color: lightgrey;
-}
-.score p {
-  font-size: 4em;
-}
-.intro p {
-  font-size: 2em;
-}
 
-button {
-  font-size: 2em;
-  width: 90%;
-  display: block;
-  margin: 1em auto;
+#controls {
+  button {
+    font-size: 2em;
+    width: 90%;
+    display: block;
+    margin: 1em auto;
+  }
+  #editor_holder > div > h3.card-title {
+    display: none !important;
+  }
+
+  .bg-light,
+  #total_requests_vs_failed svg {
+    background-color: #d2e3fc !important;
+  }
+  small.form-text {
+    color: lightgrey;
+  }
+  .score p {
+    font-size: 4em;
+  }
 }
 
 #controls,
@@ -74,22 +78,6 @@ div.score,
 div[data-schemapath='root.player'],
 button .spinner-border {
   display: none;
-}
-
-#controls #editor_holder > div > h3.card-title {
-  display: none !important;
-}
-
-#intro span,
-#front span {
-  color: red;
-  display: block;
-  margin: 5%;
-  font-size: 15em;
-  line-height: 0.8em;
-  text-transform: uppercase;
-  position: absolute;
-  z-index: 1;
 }
 
 .man {
