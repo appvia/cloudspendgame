@@ -15,17 +15,25 @@ provider:
   stage: production
   versionFunctions: false
   iamRoleStatements:
-      - Effect: "Allow"
-        Action:
+    - Effect: 'Allow'
+      Action:
         - dynamodb:PutItem
-        Resource: 
-          - Fn::GetAtt:
+      Resource:
+        - Fn::GetAtt:
             - scoreTable
             - Arn
+  httpApi:
+    cors:
+      allowedOrigins:
+        - '*'
+      # allowedHeaders:
+      # - Content-Type
+      allowedMethods:
+        - GET
+        - POST
 
   environment:
     SCORE_TABLE: ${self:custom.tableNames.scoreTable}
-
 
 functions:
   statichttp:
@@ -45,25 +53,23 @@ functions:
       - httpApi:
           path: /
           method: POST
-          cors: true
 
 package:
   include:
-    - "docs/**"
+    - 'docs/**'
   exclude:
-    - "tests/**"
-    - "*.md"
-    - "wallaby.js"
-    - "jest.config.js"
-    - "package-lock.json"
+    - 'tests/**'
+    - '*.md'
+    - 'wallaby.js'
+    - 'jest.config.js'
+    - 'package-lock.json'
     # - "node_modules/aws-sdk/**"
-    - "coverage/**"
-    - ".*"
-    - ".*/**"
+    - 'coverage/**'
+    - '.*'
+    - '.*/**'
 
 resources:
   Resources:
-
     scoreTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -77,7 +83,7 @@ resources:
           - AttributeName: id
             AttributeType: S
           - AttributeName: score
-            AttributeType: "N"
+            AttributeType: 'N'
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 2
@@ -88,10 +94,9 @@ custom:
     # caching: false
 
     sourcemaps: false
-    copyFiles:                     
-      - from: 'docs/*'             
-        to: './'                   
-
+    copyFiles:
+      - from: 'docs/*'
+        to: './'
 
   dynamodb:
     noStart: true
