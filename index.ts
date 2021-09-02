@@ -163,7 +163,16 @@ export async function play (
   const score = savings - penalties
 
   const output = {
-    data,
+    id: event.requestContext.requestId,
+    data: data
+      .filter((interval, i) => i % 60 === 0 || interval.failedRequests > 1) // reduce how much data we send the browser
+      .map(interval => {
+        return {
+          time: interval.time,
+          requests: interval.requests,
+          failedRequests: interval.failedRequests
+        }
+      }),
     totalRequests,
     failedRequests,
     spend,
