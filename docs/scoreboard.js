@@ -5,7 +5,7 @@ $.get({
   const table = document.getElementById("scoretable")
   response.map(score => {
     const row = table.insertRow()
-    row.insertCell().innerHTML = score.handle
+    row.insertCell().innerHTML = filterXSS(score.handle)
     row.insertCell().innerHTML = Math.ceil(score.score)
   })
 })
