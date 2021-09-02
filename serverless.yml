@@ -12,20 +12,34 @@ provider:
   region: eu-west-2
   stage: production
   versionFunctions: false
-  iamRoleStatements:
-    - Effect: 'Allow'
-      Action:
-        - dynamodb:PutItem
-      Resource:
-        - Fn::GetAtt:
-            - scoreTable
-            - Arn
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - dynamodb:PutItem
+          Resource:
+            - Fn::GetAtt:
+                - scoreTable
+                - Arn
+        - Effect: 'Allow'
+          Action:
+            - dynamodb:Scan
+          Resource:
+            - Fn::GetAtt:
+                - scoreTable
+                - Arn
+          Condition:
+            ForAllValues:StringEquals:
+              dynamodb:Attributes:
+                - handle
+                - score
+                - id
+
   httpApi:
     cors:
       allowedOrigins:
         - '*'
-      # allowedHeaders:
-      # - Content-Type
       allowedMethods:
         - GET
         - POST
@@ -51,6 +65,14 @@ functions:
       - httpApi:
           path: /
           method: POST
+  
+  scoreboard:
+    handler: scoreboard.scoreboard
+    timeout: 12
+    events:
+      - httpApi:
+          path: /scoreboard
+          method: GET
 
 package:
   include:
