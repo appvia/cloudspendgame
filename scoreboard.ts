@@ -22,11 +22,20 @@ export async function scoreboard (
     a.score > b.score ? -1 : 0
   )
 
+  const unique_scores = []
+  const map = new Map()
+  for (const item of scores) {
+    if (!map.has(JSON.stringify(item))) {
+      map.set(JSON.stringify(item), true)
+      unique_scores.push(item)
+    }
+  }
+
   return {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(scores)
+    body: JSON.stringify(unique_scores)
   }
 }
