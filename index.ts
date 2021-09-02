@@ -187,12 +187,16 @@ export async function play (
       Item: {
         id: event.requestContext.requestId,
         handle: payload.player.Handle || 'anonymous',
+        realname: payload.player['Real Name'] || 'anonymous',
+        email: payload.player['Email Address'] || 'anonymous',
+        companyname: payload.player.Company || 'anonymous',
         totalRequests,
         failedRequests,
         penalties,
         spend,
         savings,
-        score
+        score,
+        configuration: payload
       }
     })
     .promise()
