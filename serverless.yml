@@ -4,9 +4,7 @@ frameworkVersion: '2'
 
 useDotenv: true
 plugins:
-  - serverless-bundle # Package our functions with Webpack
-
-  # - serverless-plugin-typescript
+  - serverless-bundle
 
 provider:
   name: aws
@@ -37,7 +35,7 @@ provider:
 
 functions:
   statichttp:
-    handler: index.pageHandler
+    handler: staticHandler.pageHandler
     events:
       - httpApi:
           path: /

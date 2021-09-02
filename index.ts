@@ -1,4 +1,3 @@
-import * as fs from 'fs'
 import * as AWS from 'aws-sdk'
 
 import {
@@ -195,36 +194,5 @@ export async function play (
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(output)
-  }
-}
-
-export async function pageHandler (
-  event: APIGatewayProxyEventV2,
-  context: Context
-): Promise<APIGatewayProxyResultV2> {
-  let file, mime
-  if (event.rawPath === '/') {
-    file = './docs/index.html'
-    mime = 'text/html'
-  } else if (event.rawPath === '/form.js' || event.rawPath === '/gui.js') {
-    file = `./docs${event.rawPath}`
-    mime = 'text/javascript'
-  } else if (event.rawPath === '/man.svg' || event.rawPath === '/bg.svg') {
-    file = `./docs${event.rawPath}`
-    mime = 'image/svg+xml'
-  } else if (event.rawPath === '/schema.json') {
-    file = `./docs${event.rawPath}`
-    mime = 'application/json'
-  } else if (event.rawPath === '/styles.css') {
-    file = './docs/styles.css'
-    mime = 'text/css'
-  }
-
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': mime
-    },
-    body: fs.readFileSync(file).toString()
   }
 }
