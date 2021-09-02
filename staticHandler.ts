@@ -13,7 +13,11 @@ export async function pageHandler (
   if (event.rawPath === '/') {
     file = './docs/index.html'
     mime = 'text/html'
-  } else if (event.rawPath === '/form.js' || event.rawPath === '/gui.js') {
+  } else if (
+    event.rawPath === '/form.js' ||
+    event.rawPath === '/gui.js' ||
+    event.rawPath === '/scoreboard.js'
+  ) {
     file = `./docs${event.rawPath}`
     mime = 'text/javascript'
   } else if (event.rawPath === '/man.svg' || event.rawPath === '/bg.svg') {
