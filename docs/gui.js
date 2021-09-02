@@ -20,7 +20,7 @@ const d3GUI = data => {
       duration: loadTime,
       easing: 'swing',
       step: function (now) {
-        $(selector).text(this.Counter.toFixed(0));
+        $(selector).text(this.Counter.toFixed(0))
       }
     })
   }
@@ -52,7 +52,7 @@ const d3GUI = data => {
 
     const color = d3.scaleOrdinal()
       .domain(graph.keys)
-      .range(d3.schemeSet2);
+      .range(d3.schemeSet2)
 
     const x = d3
       .scaleTime()
