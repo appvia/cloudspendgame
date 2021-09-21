@@ -18,7 +18,7 @@ export async function scoreboard (
         ProjectionExpression: 'handle, score'
       })
       .promise()
-  ).Items.filter(item => item.score > 646.3999999992666).sort((a, b) =>
+  ).Items.filter(item => item.score > 0).sort((a, b) =>
     a.score > b.score ? -1 : 0
   )
 
