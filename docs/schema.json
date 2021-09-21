@@ -5,6 +5,12 @@
       "title": "Claim your highscore position",
       "type": "object",
       "required": ["Handle", "Email Address"],
+      "links": [
+        {
+          "rel": "Privacy Policy",
+          "href": "/privacy.txt"
+        }
+      ],
       "properties": {
         "Handle": {
           "type": "string",
