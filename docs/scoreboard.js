@@ -1,5 +1,5 @@
 $.get({
-  url: 'https://sn2lorj5j9.execute-api.eu-west-2.amazonaws.com/scoreboard',
+  url: 'https://blackfriday.sa-team.teams.kore.appvia.io/scoreboard',
   contentType: 'application/json',
 }).then(response => {
   const table = document.getElementById("scoretable")

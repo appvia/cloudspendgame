@@ -5,6 +5,7 @@ frameworkVersion: '2'
 useDotenv: true
 plugins:
   - serverless-bundle
+  - serverless-domain-manager
 
 provider:
   name: aws
@@ -128,3 +129,14 @@ custom:
       - production
     start:
       migrate: true
+
+  customDomain:
+    domainName: blackfriday.sa-team.teams.kore.appvia.io
+    stage: production
+    basePath: ""
+    certificateName: sa-team.teams.kore.appvia.io
+    createRoute53Record: true
+    endpointType: 'regional'
+    securityPolicy: tls_1_2
+    apiType: http
+    autoDomain: false

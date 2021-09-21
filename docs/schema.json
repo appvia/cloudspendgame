@@ -72,14 +72,6 @@
     "Frontend": {
       "type": "object",
       "properties": {
-        "Maximum Replica": {
-          "type": "integer",
-          "minimum": 1,
-          "default": 550,
-          "options": {
-            "format": "number"
-          }
-        },
         "CPU Limit": {
           "title": "CPU Limit (millicores)",
           "type": "integer",
@@ -106,6 +98,14 @@
             "format": "number"
           }
         },
+        "Maximum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 550,
+          "options": {
+            "format": "number"
+          }
+        },
         "CPU Scaling Threshold": {
           "type": "integer",
           "maximum": 100,
@@ -123,14 +123,6 @@
     "Backend": {
       "type": "object",
       "properties": {
-        "Maximum Replica": {
-          "type": "integer",
-          "minimum": 1,
-          "default": 1000,
-          "options": {
-            "format": "number"
-          }
-        },
         "CPU Limit": {
           "title": "CPU Limit (millicores)",
           "type": "integer",
@@ -157,6 +149,14 @@
             "format": "number"
           }
         },
+        "Maximum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1000,
+          "options": {
+            "format": "number"
+          }
+        },
         "CPU Scaling Threshold": {
           "type": "integer",
           "maximum": 100,
@@ -171,14 +171,6 @@
     "Database": {
       "type": "object",
       "properties": {
-        "Maximum Replica": {
-          "type": "integer",
-          "minimum": 1,
-          "default": 80,
-          "options": {
-            "format": "number"
-          }
-        },
         "CPU Limit": {
           "title": "CPU Limit (millicores)",
           "type": "integer",
@@ -201,6 +193,14 @@
           "type": "integer",
           "minimum": 1,
           "default": 10,
+          "options": {
+            "format": "number"
+          }
+        },
+        "Maximum Replica": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 80,
           "options": {
             "format": "number"
           }

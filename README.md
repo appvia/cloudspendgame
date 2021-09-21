@@ -11,3 +11,11 @@
 - [x] calculate failed requests from delta of ready to needed
 - [x] calculate compute costs
 - [ ] allow configuring readiness tests
+
+# deploy
+
+```bash
+npm i
+sls create_domain
+sls deploy
+```
