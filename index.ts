@@ -26,7 +26,7 @@ export const pullers = [
   { time: 1638316799000, requests: 50 } // desc: 'end tuesday 23:59' }
 ]
 export const failedRequestPenalty = 0.01
-export const baseLineCost = 20000
+export const baseLineCost = 19907
 
 export const nodes = {
   't2.medium': {
