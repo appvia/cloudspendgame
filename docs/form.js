@@ -36,7 +36,7 @@ $("button").click(() => {
 
   })
     .catch(error => {
-      alert("could not fit minimum number of pods specified on the minimum number of nodes")
+      alert("Unable to fit minimum number of pods specified on the minimum number of nodes specified")
     })
     .then(response => {
       $("button").attr("disabled", false)
