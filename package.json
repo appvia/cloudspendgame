@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/appvia/cloudspendgame#readme",
   "dependencies": {
-    "cloud-spend-forecaster": "github:appvia/cloud-spend-forecaster"
+    "cloud-spend-forecaster": "github:appvia/cloud-spend-forecaster",
+    "jsonschema": "^1.4.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.83",

@@ -5,8 +5,11 @@ import {
   APIGatewayProxyResultV2,
   APIGatewayProxyEventV2
 } from 'aws-lambda'
+import * as schema from './docs/schema.json'
 
 import { calculate } from 'cloud-spend-forecaster'
+
+import validate from 'jsonschema'
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
 const TableName = process.env.SCORE_TABLE
@@ -62,11 +65,12 @@ export async function play (
 ): Promise<APIGatewayProxyResultV2> {
   const payload = JSON.parse(event.body)
 
+  const res = validate.validate(payload, schema)
+  if (!res.valid) throw new Error('INVALID PAYLOAD')
+
   const node = {
     ...nodes[payload.Nodes['Node Type']],
-    minNodes: payload.Nodes.nodeScaling
-      ? payload.Nodes['Node minimum count']
-      : payload.Nodes['Node maximum count'],
+    minNodes: payload.Nodes['Node minimum count'],
     maxNodes: payload.Nodes['Node maximum count']
   }
   const components = [
@@ -78,13 +82,9 @@ export async function play (
       baselineMemory: 512,
       limitMemory: payload.Backend['Memory Limit'],
       limitCpu: payload.Backend['CPU Limit'],
-      minReplica: payload.Backend.HPA
-        ? payload.Backend['Minimum Replica']
-        : payload.Backend['Maximum Replica'],
+      minReplica: payload.Backend['Minimum Replica'],
       maxReplica: payload.Backend['Maximum Replica'],
-      scalingThresholdCpu: payload.Backend.HPA
-        ? payload.Backend['CPU Scaling Threshold']
-        : 99,
+      scalingThresholdCpu: payload.Backend['CPU Scaling Threshold'],
       scalingIntervals: 2
     },
     {
@@ -95,13 +95,9 @@ export async function play (
       baselineMemory: 32,
       limitMemory: payload.Frontend['Memory Limit'],
       limitCpu: payload.Frontend['CPU Limit'],
-      minReplica: payload.Frontend.HPA
-        ? payload.Frontend['Minimum Replica']
-        : payload.Frontend['Maximum Replica'],
+      minReplica: payload.Frontend['Minimum Replica'],
       maxReplica: payload.Frontend['Maximum Replica'],
-      scalingThresholdCpu: payload.Frontend.HPA
-        ? payload.Frontend['CPU Scaling Threshold']
-        : 99,
+      scalingThresholdCpu: payload.Frontend['CPU Scaling Threshold'],
       scalingIntervals: 2
     },
     {
@@ -112,13 +108,9 @@ export async function play (
       baselineMemory: 1024,
       limitMemory: payload.Database['Memory Limit'],
       limitCpu: payload.Database['CPU Limit'],
-      minReplica: payload.Database.HPA
-        ? payload.Database['Minimum Replica']
-        : payload.Database['Maximum Replica'],
+      minReplica: payload.Database['Minimum Replica'],
       maxReplica: payload.Database['Maximum Replica'],
-      scalingThresholdCpu: payload.Database.HPA
-        ? payload.Database['CPU Scaling Threshold']
-        : 99,
+      scalingThresholdCpu: payload.Database['CPU Scaling Threshold'],
       scalingIntervals: 2
     }
   ]
@@ -152,11 +144,6 @@ export async function play (
     (accumulator, interval) => accumulator + interval.cost,
     0
   )
-
-  if (payload.Nodes.nodeScaling) spend = spend + 300
-  if (payload.Frontend.HPA) spend = spend + 200
-  if (payload.Backend.HPA) spend = spend + 200
-  if (payload.Database.HPA) spend = spend + 1500
 
   const penalties = failedRequests * failedRequestPenalty
   const savings = baseLineCost - spend
