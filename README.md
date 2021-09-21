@@ -16,6 +16,6 @@
 
 ```bash
 npm i
-sls create_domain
-sls deploy
+SLS_DEBUG=* AWS_REGION=eu-west-2 aws-vault exec kore-sa-team-notprod --no-session -- serverless create_domain
+SLS_DEBUG=* AWS_REGION=eu-west-2 aws-vault exec kore-sa-team-notprod --no-session -- serverless deploy
 ```
