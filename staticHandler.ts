@@ -13,6 +13,9 @@ export async function pageHandler (
   if (event.rawPath === '/') {
     file = './docs/index.html'
     mime = 'text/html'
+  } else if (event.rawPath === '/scores.html') {
+    file = './docs/scores.html'
+    mime = 'text/html'
   } else if (
     event.rawPath === '/form.js' ||
     event.rawPath === '/gui.js' ||
@@ -29,6 +32,9 @@ export async function pageHandler (
   } else if (event.rawPath === '/styles.scss') {
     file = './docs/styles.scss'
     mime = 'text/scss'
+  } else if (event.rawPath === '/privacy.txt') {
+    file = './docs/privacy.txt'
+    mime = 'text'
   }
 
   return {
