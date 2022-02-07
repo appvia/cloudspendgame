@@ -1,16 +1,8 @@
-- [x] generate request timeseries data
-- [x] calculate necessary cpu+memory for requests
-- [x] calculate necessary replicas
-- [x] calculate necessary cpu+memory for replicas
-- [x] calculate necessary nodes
-- [x] calculate desired replicas
-- [x] calculate desired nodes
-- [x] calculate ready nodes
-- [x] calculate ready pods
-- [x] calculate capacity from ready pods
-- [x] calculate failed requests from delta of ready to needed
-- [x] calculate compute costs
-- [ ] allow configuring readiness tests
+# Black Friday Game
+
+This is the game you can play on https://blackfriday.appvia.io/
+
+Or watch our video about it[![Video](https://img.youtube.com/vi/Ij7IKrSFqas/0.jpg)](https://www.youtube.com/watch?v=Ij7IKrSFqas)
 
 # deploy
 
