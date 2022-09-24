@@ -24,7 +24,7 @@
     "jsonschema": "^1.4.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "8.10.104",
+    "@types/aws-lambda": "8.10.105",
     "serverless": "3.22.0",
     "serverless-bundle": "5.5.0",
     "serverless-domain-manager": "6.1.0",
