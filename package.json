@@ -27,7 +27,7 @@
     "@types/aws-lambda": "8.10.114",
     "serverless": "3.28.1",
     "serverless-bundle": "6.0.0",
-    "serverless-domain-manager": "7.0.0",
+    "serverless-domain-manager": "7.0.1",
     "typescript": "5.0.2"
   },
   "optionalDependencies": {
